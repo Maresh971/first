@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git checkout') {
+            steps {
+                git 'https://github.com/Maresh971/first.git'
+            }
+        }
+         stage('execute ansible') {
+            steps {
+                ansiblePlaybook credentialsId: 'ansible12', disableHostKeyChecking: true, installation: 'ansible12', inventory: 'dev.inv', playbook: 'apache.yml', vaultTmpPath: ''
+            }
+        }
+    }
+}
